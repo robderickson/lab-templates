@@ -79,7 +79,7 @@
     {
       "type": "vagrant",
       "compression_level": 1,
-      "output": "../vagrant/boxes/packer_{{.BuildName}}_{{.Provider}}.box"
+      "output": "../../vagrant/boxes/packer_{{.BuildName}}_{{.Provider}}.box"
     }
   ]
 }

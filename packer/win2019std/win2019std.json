@@ -7,7 +7,7 @@
     "iso_url": "file:///e:/isos/en_windows_server_2019_updated_march_2020_x64_dvd_337baef4.iso",
     "memsize": "2048",
     "numvcpus": "2",
-    "vm_name": "dc01",
+    "vm_name": "win2019std",
     "winrm_password" : "vagrant",
     "winrm_username" : "vagrant"
   },

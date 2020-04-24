@@ -1,0 +1,32 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Borrowed heavily from https://github.com/rgl/windows-domain-controller-vagrant/blob/master/Vagrantfile
+$domain = "example.com"
+$ip = "192.168.56.2"
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "StefanScherer/windows_2019_docker"
+  config.vm.hostname = "dc1"
+  config.vm.network "private_network", ip: $ip
+  config.vm.communicator = "winrm"
+
+  config.winrm.username ="vagrant"
+  config.winrm.password = "vagrant"
+  config.winrm.transport = :plaintext
+  config.winrm.basic_auth_only = true
+
+  config.vm.provider "virtualbox" do |v, override|
+    v.gui = true
+    v.name = "dc1"
+    v.cpus = 2
+    v.memory = 2048
+  end
+
+  config.vm.provision "shell", path: "scripts/install-ad.ps1", args: [$domain]
+  config.vm.provision "shell", reboot: true
+  config.vm.provision "shell", path: "scripts/configure-ad.ps1"
+  config.vm.provision "shell", reboot: true
+
+end
